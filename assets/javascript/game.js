@@ -11,8 +11,8 @@ console.log(answerChoice);
 var emptyDiv = document.getElementById("empty-div");
 var count = "15";
 var newDiv = document.getElementsByClassName("new-div");
+var userChoice;
 var winning = answerChoice.split("");
-
 
 (function () {
   "use strict";
