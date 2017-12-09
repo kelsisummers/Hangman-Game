@@ -10,8 +10,10 @@ let wordChoice = hangmanAnswers[Math.floor(Math.random() * hangmanAnswers.length
 // Troubleshoot: Log Random Word To Console
 console.log(wordChoice, wordChoice.length);
 
-// // Not sure? May not need...
-// let correctLettersArray = [];
+// Variables for User Guesses & lettersGuessedArray
+var guessedLettersArray = [];
+
+var answerArray = [];
 
 // Defining Variables From HTML
 var wins = document.getElementById('win');
@@ -26,64 +28,56 @@ var lettersGuessed = document.getElementById('empty-div');
 
 // Underscore Function: Generates Underscore For Each Letter In Word
 function underscoreBuilder(currentWord) {
-var answerArray = [];
   for (var answerIndex = 0; answerIndex < currentWord.length; answerIndex++) {
-answerArray.push("_");
+    answerArray.push("_");
+
   }
 return answerArray;
 }
 const currentUnderscore = underscoreBuilder(wordChoice);
+currentWord.textContent = currentUnderscore.join(' ');
 
 // Troubleshoot underscoreBuilder
 console.log(currentUnderscore);
 
 
-// Need Help! Key Press Will Generate userGuess
-
-// function keyFunction(event) {
-//   var userGuesses = event.which || event.keyCode;
-//   console.log(userGuesses);
-//   return userGuesses;
-// }
-
-var userGuesses = '';
-
+// Keypress Generates User Guess
 document.onkeyup = function(event) {
-  let userGuesses = event.key;
-  console.log(userGuesses);
-  
+  let keyPress = event.key;
+  console.log(keyPress); 
+
   // Correct Guesses Function
-function checkGuesses(currentGuess, currentWord) {
-  var correctGuessArray = [];
-  var countDown = 15;
   
-  // Need Help! Will Reduce Count By 1
-  // if (currentWord.charAt(guessIndex) !== currentGuess) {
-  //   countDown--;
-  // }
-  
-    for (var guessIndex = 0; guessIndex < currentWord.length; guessIndex++) {
-      if (currentWord.charAt(guessIndex) == currentGuess) {
-      correctGuessArray.push(currentGuess);
-    } else {
-      correctGuessArray.push("_");
-    }
+    var correctGuessArray = [];
+console.log(wordChoice.indexOf(keyPress));
+
+    if (wordChoice.indexOf(keyPress) < 0) {
+      guessedLettersArray.push(keyPress);
+      lettersGuessed.textContent = guessedLettersArray.join(' ');
+    };
+      
+
+    for (var guessIndex = 0; guessIndex < wordChoice.length; guessIndex++) {
+      if (wordChoice.charAt(guessIndex) == keyPress) {
+        answerArray[guessIndex] = keyPress;
+      }
   }
-  
-  count.textContent = countDown;
-  var correctGuessArray = correctGuessArray.join(' ');
-  return correctGuessArray;
-  }
-  let myCorrectWordsArray = checkGuesses(userGuesses, wordChoice);
-  console.log("Underscores with letters: ", myCorrectWordsArray);
-  currentWord.textContent = myCorrectWordsArray;
-  lettersGuessed.textContent = userGuesses;
+
+  currentWord.textContent = answerArray.join(' ');
 }
 
 
 
+// Winning and Losing
+var countDown = 15;
+var isWinning = 0;
+count.textContent = countDown;
+wins.textContent = isWinning;
 
-
+  // Need Help! Will Reduce Count By 1
+  // if (currentWord.charAt(guessIndex) !== currentGuess) {
+  //   countDown--;
+  // }
 
 // Need Help! Will Increase Win Score By One; Reset Game
 // function isWinning (finishedWord, currentWord) {
@@ -96,9 +90,3 @@ function checkGuesses(currentGuess, currentWord) {
 //     return true;
 // }
 // const myLettersArray = isWinning(finishedWord, wordChoice)
-
-// Write to HTML
-
-
-
-// Troubleshoot Check Guesses Function
