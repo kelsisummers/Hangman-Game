@@ -5,6 +5,7 @@ body {
 
 .jumbotron {
     border: 10px dashed white;
+    background-color: black;
 }
 
 #current-word, #count, #win, #empty-div {

@@ -39,31 +39,51 @@ console.log(currentUnderscore);
 
 
 // Need Help! Key Press Will Generate userGuess
-const userGuesses = "l";
 
-
-// Correct Guesses Function
-function checkGuesses(currentGuess, currentWord) {
-var correctGuessArray = [];
-var countDown = 15;
-
-// Need Help! Will Reduce Count By 1
-// if (currentWord.charAt(guessIndex) !== currentGuess) {
-//   countDown--;
+// function keyFunction(event) {
+//   var userGuesses = event.which || event.keyCode;
+//   console.log(userGuesses);
+//   return userGuesses;
 // }
-  for (var guessIndex = 0; guessIndex < currentWord.length; guessIndex++) {
-    if (currentWord.charAt(guessIndex) == currentGuess) {
-    correctGuessArray.push(currentGuess);
-  } else {
-    correctGuessArray.push("_");
+
+var userGuesses = '';
+
+document.onkeyup = function(event) {
+  let userGuesses = event.key;
+  console.log(userGuesses);
+  
+  // Correct Guesses Function
+function checkGuesses(currentGuess, currentWord) {
+  var correctGuessArray = [];
+  var countDown = 15;
+  
+  // Need Help! Will Reduce Count By 1
+  // if (currentWord.charAt(guessIndex) !== currentGuess) {
+  //   countDown--;
+  // }
+  
+    for (var guessIndex = 0; guessIndex < currentWord.length; guessIndex++) {
+      if (currentWord.charAt(guessIndex) == currentGuess) {
+      correctGuessArray.push(currentGuess);
+    } else {
+      correctGuessArray.push("_");
+    }
   }
+  
+  count.textContent = countDown;
+  var correctGuessArray = correctGuessArray.join(' ');
+  return correctGuessArray;
+  }
+  let myCorrectWordsArray = checkGuesses(userGuesses, wordChoice);
+  console.log("Underscores with letters: ", myCorrectWordsArray);
+  currentWord.textContent = myCorrectWordsArray;
+  lettersGuessed.textContent = userGuesses;
 }
 
-count.textContent = countDown;
-var correctGuessArray = correctGuessArray.join(' ');
-return correctGuessArray;
-}
-const myCorrectWordsArray = checkGuesses(userGuesses, wordChoice);
+
+
+
+
 
 // Need Help! Will Increase Win Score By One; Reset Game
 // function isWinning (finishedWord, currentWord) {
@@ -78,8 +98,7 @@ const myCorrectWordsArray = checkGuesses(userGuesses, wordChoice);
 // const myLettersArray = isWinning(finishedWord, wordChoice)
 
 // Write to HTML
-currentWord.textContent = myCorrectWordsArray;
-lettersGuessed.textContent = userGuesses;
+
+
 
 // Troubleshoot Check Guesses Function
-console.log("Underscores with letters: ", myCorrectWordsArray)
