@@ -1,68 +1,85 @@
-var hangman = {
-    // "real name": "Gandalf",
-    "answers": 
-        ["APOCALYTICA","ATREYU","AUDIOSLAVE","AVATAR","BEARTOOTH","BOBAFLEX","BUCKETHEAD","BUSH","CHEVELLE","CHIMAIRA","CHIODOS","CIRICE","DETHKLOK","DISTURBED","EVANESCENCE","FLYLEAF","GHOST","GODSMACK","HIM","HALESTORM","KORN","MEGADEATH","METALLICA","NICKELBACK","NIRVANA","PANTERA","PULLEY","RED","RUSH","SAOSIN","SEETHER","SHINEDOWN","SILVERSTEIN","SKILLET","STAIND","STARSET","THRICE","TOOL","TRAPT","TRIVIUM","TURBOWOLF","UNDEROATH","URIAH","VOLBEAT"],
-    "alphabet": 
-        ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+// Variables
+
+// Answers Array
+let hangmanAnswers =
+["apocalyptica","atreyu","audioslave","avatar","beartooth","bobaflex","buckethead","bush","chevelle","chimaira","chiodos","cirice","dethklok","disturbed","evanescence","flyleaf","ghost","godsmack","him","halestorm","korn","megadeath","metallica","nickelback","nirvana","pantera","pulley","red","rush","saosin","seether","shinedown","silverstein","skillet","staind","starset","thrice","tool","trapt","trivium","turbowolf","underoath","uriah","volbeat"];
+
+// Prompts Computer To Generate Random Word From Array Above
+let wordChoice = hangmanAnswers[Math.floor(Math.random() * hangmanAnswers.length)];
+
+// Troubleshoot: Log Random Word To Console
+console.log(wordChoice, wordChoice.length);
+
+// // Not sure? May not need...
+// let correctLettersArray = [];
+
+// Defining Variables From HTML
+var wins = document.getElementById('win');
+var currentWord = document.getElementById("current-word");
+var count = document.getElementById('count');
+var lettersGuessed = document.getElementById('empty-div');
+
+
+
+// Functions
+
+
+// Underscore Function: Generates Underscore For Each Letter In Word
+function underscoreBuilder(currentWord) {
+var answerArray = [];
+  for (var answerIndex = 0; answerIndex < currentWord.length; answerIndex++) {
+answerArray.push("_");
+  }
+return answerArray;
 }
+const currentUnderscore = underscoreBuilder(wordChoice);
 
-var answerChoice = hangman.answers[Math.floor(Math.random() * hangman.answers.length)];
-console.log(answerChoice);
-var emptyDiv = document.getElementById("empty-div");
-var count = "15";
-var newDiv = document.getElementsByClassName("new-div");
-var userChoice;
-var winning = answerChoice.split("");
-
-(function () {
-  "use strict";
-
-  function createDiv() {
-    var boardDiv = document.createElement("div");
-    boardDiv.className = "new-div";
-    return boardDiv;
-  }
-
-  function createAndModifyDivs() {
-    var board = document.getElementById("board"),
-      myDivs = [];
-      var i = 0, length = answerChoice.length;
-
-    for (i; i < length; i++) {
-      myDivs.push(createDiv());
-      board.appendChild(myDivs[i]);
-    }
+// Troubleshoot underscoreBuilder
+console.log(currentUnderscore);
 
 
-  }
-  
-  createAndModifyDivs();
+// Need Help! Key Press Will Generate userGuess
+const userGuesses = "l";
 
-}());
 
-document.onkeyup = function(event) {
-  var userChoice = event.key;
-  var remaining = document.getElementById("count");
-  console.log(userChoice);
+// Correct Guesses Function
+function checkGuesses(currentGuess, currentWord) {
+var correctGuessArray = [];
+var countDown = 15;
 
-// for (var i in winning ){
-//   if (userChoice == winning[i]) {
-//     console.log(userChoice);
-//       }}
-
-for (var i = 0; i < hangman.alphabet.length; i++) {
-  if (userChoice == hangman.alphabet[i]) {
-    count--;
-    remaining.innerText = count;
-
-for (var i = 0; i < hangman.alphabet.length; i++) {
-  if (userChoice == hangman.alphabet[i]) {
-    var letterGuessed = document.createElement("div");
-    emptyDiv.appendChild(letterGuessed);
-    letterGuessed.className = "guessed";
-    letterGuessed.innerText = userChoice;        
-    }
+// Need Help! Will Reduce Count By 1
+// if (currentWord.charAt(guessIndex) !== currentGuess) {
+//   countDown--;
+// }
+  for (var guessIndex = 0; guessIndex < currentWord.length; guessIndex++) {
+    if (currentWord.charAt(guessIndex) == currentGuess) {
+    correctGuessArray.push(currentGuess);
+  } else {
+    correctGuessArray.push("_");
   }
 }
+
+count.textContent = countDown;
+var correctGuessArray = correctGuessArray.join(' ');
+return correctGuessArray;
 }
-};
+const myCorrectWordsArray = checkGuesses(userGuesses, wordChoice);
+
+// Need Help! Will Increase Win Score By One; Reset Game
+// function isWinning (finishedWord, currentWord) {
+//   let correctLettersArray = myCorrectWordsArray;
+//   let winning = 0;
+//     if (finishedWord == wordChoice) {
+//       winning++;
+//     }
+//     wins.textContent = winning;
+//     return true;
+// }
+// const myLettersArray = isWinning(finishedWord, wordChoice)
+
+// Write to HTML
+currentWord.textContent = myCorrectWordsArray;
+lettersGuessed.textContent = userGuesses;
+
+// Troubleshoot Check Guesses Function
+console.log("Underscores with letters: ", myCorrectWordsArray)

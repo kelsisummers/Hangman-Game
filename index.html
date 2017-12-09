@@ -9,26 +9,64 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- My CSS -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Bangers|VT323" rel="stylesheet">
 
 </head>
 <body>
-
-<h1>Press any key to start!</h1>
-
-<h1>Wins:</h1>
-
-<h1>Current Word:</h1>
-
-<div id="board"></div>
-
-<h1>Number of Guesses Remaining:</h1><h2 id="count">15</h2>
-
-<h1>Letters Already Guessed:</h1>
-
-<div id="empty-div"></div>
+                
+    <div class="container">
+    <header class="header clearfix">
+        <h1 class="text-muted" style="font-size: 100px">Hangman</h1>
+        </header>
     
+        <main role="main">
+                
+            <div class="jumbotron jumbotron-fluid text-center" style="background-color: black">
+                <h1 class="display-3">Rock the Ages Edition</h1>
+                <br>
+                <h2 class="text-muted">Press any key to start...</h2>
+                <br><br>
+
+                <div class="row marketing">
+                    <div class="col-lg-6">
+                        <h2>Current Word:</h2>
+                        <br>
+                        <div id="current-word"></div>
+
+                        <br><br>
+
+                        <h2>Guesses Remaining:</h2>
+                        <br>
+                        <div id="count"></div>
+                
+                    </div>
+                
+                    <div class="col-lg-6">
+                        <h2>Wins:</h2>
+                        <br>
+                        <div id="win"></div>
+
+                        <br><br>
+
+                        <h2>Letters Guessed:</h2>
+                        <br>
+                        <div id="empty-div"></div>
+                
+                    </div>
+                </div>
+            </div>
+                
+        </main>
+    <footer class="footer">
+        <div class="container text-center">
+            <span class="text-muted">© 2017 Kelsi Summers</span>
+        </div>
+    </footer>    
 
 <!-- Javascript and JQuery Links -->
 <script src="assets/javascript/game.js"></script>
