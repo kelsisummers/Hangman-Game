@@ -21,6 +21,11 @@ var currentWord = document.getElementById("current-word");
 var count = document.getElementById('count');
 var lettersGuessed = document.getElementById('empty-div');
 
+// Winning and Losing
+var countDown = 15;
+var isWinning = 0;
+count.textContent = countDown;
+wins.textContent = isWinning;
 
 
 // Functions
@@ -45,34 +50,35 @@ console.log(currentUnderscore);
 document.onkeyup = function(event) {
   let keyPress = event.key;
   console.log(keyPress); 
-
-  // Correct Guesses Function
-  
-    var correctGuessArray = [];
-console.log(wordChoice.indexOf(keyPress));
+  console.log(wordChoice.indexOf(keyPress));
 
     if (wordChoice.indexOf(keyPress) < 0) {
       guessedLettersArray.push(keyPress);
       lettersGuessed.textContent = guessedLettersArray.join(' ');
+      countDown--;
+      count.textContent = countDown;
     };
-      
 
     for (var guessIndex = 0; guessIndex < wordChoice.length; guessIndex++) {
       if (wordChoice.charAt(guessIndex) == keyPress) {
         answerArray[guessIndex] = keyPress;
       }
   }
-
   currentWord.textContent = answerArray.join(' ');
+  console.log(answerArray.join(''),wordChoice);
+
+  if (answerArray.join('') === wordChoice) {
+    isWinning++;
+    wins.textContent = isWinning;
+    lettersGuessed.textContent = '';
+  }
 }
 
 
 
-// Winning and Losing
-var countDown = 15;
-var isWinning = 0;
-count.textContent = countDown;
-wins.textContent = isWinning;
+
+
+
 
   // Need Help! Will Reduce Count By 1
   // if (currentWord.charAt(guessIndex) !== currentGuess) {
