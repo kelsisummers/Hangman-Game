@@ -19,6 +19,7 @@ var wins = document.getElementById('win');
 var currentWord = document.getElementById("current-word");
 var count = document.getElementById('count');
 var lettersGuessed = document.getElementById('empty-div');
+var flashWord = document.getElementsByClassName('flashit');
 
 // Winning and Losing Scores
 var countDown = 10;
@@ -88,9 +89,13 @@ document.onkeyup = function(event) {
             console.log(wordChoice, answerArray);
           } else {
             alert('Rock on.');
+            document.getElementById('current-word').setAttribute("class", "flashit");
             currentWord.textContent = 'GAME OVER';
+            document.getElementById('empty-div').setAttribute("class", "flashit");
             lettersGuessed.textContent = 'GAME OVER';
+            document.getElementById('win').setAttribute("class", "flashit");
             wins.textContent = 'GAME OVER';
+            document.getElementById('count').setAttribute("class", "flashit");
             count.textContent = 'GAME OVER';
           }
       }
