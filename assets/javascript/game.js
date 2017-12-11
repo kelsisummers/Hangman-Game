@@ -4,15 +4,14 @@
 let hangmanAnswers =
 ["apocalyptica","atreyu","audioslave","avatar","beartooth","bobaflex","buckethead","bush","chevelle","chimaira","chiodos","cirice","dethklok","disturbed","evanescence","flyleaf","ghost","godsmack","him","halestorm","korn","megadeath","metallica","nickelback","nirvana","pantera","pulley","red","rush","saosin","seether","shinedown","silverstein","skillet","staind","starset","thrice","tool","trapt","trivium","turbowolf","underoath","uriah","volbeat"];
 
-// Prompts Computer To Generate Random Word From Array Above
+//Generates Random Word From Array Above
 let wordChoice = hangmanAnswers[Math.floor(Math.random() * hangmanAnswers.length)];
 
 // Troubleshoot: Log Random Word To Console
 console.log(wordChoice, wordChoice.length);
 
-// Variables for User Guesses & lettersGuessedArray
+// Variables for Guessed Letters
 var guessedLettersArray = [];
-
 var answerArray = [];
 
 // Defining Variables From HTML
@@ -35,64 +34,83 @@ wins.textContent = isWinning;
 function underscoreBuilder(currentWord) {
   for (var answerIndex = 0; answerIndex < currentWord.length; answerIndex++) {
     answerArray.push("_");
-
   }
 return answerArray;
 }
 const currentUnderscore = underscoreBuilder(wordChoice);
+
+// Joins Characters In answerArray
 currentWord.textContent = currentUnderscore.join(' ');
 
 // Troubleshoot underscoreBuilder
 console.log(currentUnderscore);
 
 
-// Keypress Generates User Guess
+// Keyup Event Initiates Game Function
 document.onkeyup = function(event) {
   let keyPress = event.key;
+  // Troubleshoots keyPress to Console
   console.log(keyPress); 
-  console.log(wordChoice.indexOf(keyPress));
 
-    if (wordChoice.indexOf(keyPress) < 0) {
+    // Determines Incorrect Letter Guess and Pushes to Array
+    if (wordChoice.indexOf(keyPress) < 0 && keyPress.match(/^[a-z]+$/)) {
       guessedLettersArray.push(keyPress);
       lettersGuessed.textContent = guessedLettersArray.join(' ');
+      // Decreases Guesses Remaining
       countDown--;
-      count.textContent = countDown;
+      count.textContent = countDown; 
+
+      // Defines Game Over Conditions
+      if (countDown===0) {
+        answerArray = [];
+        guessedLettersArray = [];
+        count.textContent = 0;
+        alert('GAME OVER');
+          // Determines End of Game or Restart
+          if (confirm ('Play again?') === true) {
+            lettersGuessed.textContent = '';
+            countDown = 15;
+            count.textContent = countDown;
+            wordChoice = hangmanAnswers[Math.floor(Math.random() * hangmanAnswers.length)];
+            console.log(wordChoice);
+            underscoreBuilder(wordChoice);
+            currentWord.textContent = answerArray.join(' ');
+          } else {
+            alert('Rock on.');
+            currentWord.textContent = 'GAME OVER';
+            lettersGuessed.textContent = 'GAME OVER';
+            wins.textContent = 'GAME OVER';
+            count.textContent = 'GAME OVER';
+          }
+      }
     };
 
-    for (var guessIndex = 0; guessIndex < wordChoice.length; guessIndex++) {
-      if (wordChoice.charAt(guessIndex) == keyPress) {
-        answerArray[guessIndex] = keyPress;
-      }
+  // Determines Correct Guess and Updates Array
+  for (var guessIndex = 0; guessIndex < wordChoice.length; guessIndex++) {
+    if (wordChoice.charAt(guessIndex) == keyPress) {
+      answerArray[guessIndex] = keyPress;
+      currentWord.textContent = answerArray.join(' ');
+    }
   }
-  currentWord.textContent = answerArray.join(' ');
-  console.log(answerArray.join(''),wordChoice);
 
+  // Restarts Game When User Has Won
   if (answerArray.join('') === wordChoice) {
+    // Clears Previous Guesses
+    guessedLettersArray = [];
+    lettersGuessed.textContent = '';
+    // Increments Win Score
     isWinning++;
     wins.textContent = isWinning;
-    lettersGuessed.textContent = '';
+    // Restarts Guesses Remaining
+    countDown = 15;
+    count.textContent = countDown;
+    // New Word Is Chosen At Random And Game Starts Over
+    currentWord.textContent = '';
+    wordChoice = hangmanAnswers[Math.floor(Math.random() * hangmanAnswers.length)];
+    answerArray = [];
+    underscoreBuilder(wordChoice);
+    currentWord.textContent = answerArray.join(' ');
+    // Troubeshoot Restart
+    console.log(wordChoice, answerArray);
   }
 }
-
-
-
-
-
-
-
-  // Need Help! Will Reduce Count By 1
-  // if (currentWord.charAt(guessIndex) !== currentGuess) {
-  //   countDown--;
-  // }
-
-// Need Help! Will Increase Win Score By One; Reset Game
-// function isWinning (finishedWord, currentWord) {
-//   let correctLettersArray = myCorrectWordsArray;
-//   let winning = 0;
-//     if (finishedWord == wordChoice) {
-//       winning++;
-//     }
-//     wins.textContent = winning;
-//     return true;
-// }
-// const myLettersArray = isWinning(finishedWord, wordChoice)
