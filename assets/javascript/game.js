@@ -75,8 +75,9 @@ document.onkeyup = function(event) {
         answerArray = [];
         guessedLettersArray = [];
         alert('GAME OVER');
+        alert("Who Rocks? " + wordChoice.charAt(0).toUpperCase() + wordChoice.slice(1) + ('.'));
           // Determines End Of Game Or Restart
-          if (confirm ('Play again?') === true) {
+          if (confirm ('Play Again?') === true) {
             lettersGuessed.textContent = '';
             countDown = 10;
             count.textContent = countDown;
@@ -97,6 +98,7 @@ document.onkeyup = function(event) {
 
   // Restarts Game When User Has Won
   if (answerArray.join('') === wordChoice) {
+    alert (wordChoice.charAt(0).toUpperCase() + wordChoice.slice(1) + ' Rocks!');
     // Clears Previous Guesses
     guessedLettersArray = [];
     lettersGuessed.textContent = '';
