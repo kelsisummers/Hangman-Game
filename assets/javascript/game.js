@@ -4,24 +4,24 @@
 let hangmanAnswers =
 ["apocalyptica","atreyu","audioslave","avatar","beartooth","bobaflex","buckethead","bush","chevelle","chimaira","chiodos","cirice","dethklok","disturbed","evanescence","flyleaf","ghost","godsmack","him","halestorm","korn","megadeath","metallica","nickelback","nirvana","pantera","pulley","red","rush","saosin","seether","shinedown","silverstein","skillet","staind","starset","thrice","tool","trapt","trivium","turbowolf","underoath","uriah","volbeat"];
 
-//Generates Random Word From Array Above
+//Generates Random Word From hangmanAnswers Array
 let wordChoice = hangmanAnswers[Math.floor(Math.random() * hangmanAnswers.length)];
 
 // Troubleshoot: Log Random Word To Console
 console.log(wordChoice, wordChoice.length);
 
-// Variables for Guessed Letters
+// Empty Arrays For Chosen Word and Guessed Letters
 var guessedLettersArray = [];
 var answerArray = [];
 
-// Defining Variables From HTML
+// Defining Variables For HTML
 var wins = document.getElementById('win');
 var currentWord = document.getElementById("current-word");
 var count = document.getElementById('count');
 var lettersGuessed = document.getElementById('empty-div');
 
-// Winning and Losing
-var countDown = 15;
+// Winning and Losing Scores
+var countDown = 10;
 var isWinning = 0;
 count.textContent = countDown;
 wins.textContent = isWinning;
@@ -37,23 +37,25 @@ function underscoreBuilder(currentWord) {
   }
 return answerArray;
 }
+
+// Call Function
 const currentUnderscore = underscoreBuilder(wordChoice);
 
 // Joins Characters In answerArray
 currentWord.textContent = currentUnderscore.join(' ');
 
-// Troubleshoot underscoreBuilder
+// Troubleshoot: underscoreBuilder Function
 console.log(currentUnderscore);
 
 
 // Keyup Event Initiates Game Function
 document.onkeyup = function(event) {
   let keyPress = event.key;
-  // Troubleshoots keyPress to Console
+  // Troubleshoot: Logs keyPress to Console
   console.log(keyPress); 
 
-    // Determines Incorrect Letter Guess and Pushes to Array
-    if (wordChoice.indexOf(keyPress) < 0 && keyPress.match(/^[a-z]+$/)) {
+    // Determines If keyPress Is Incorrect, Matches Alphabet Character, and Has Already Been Pressed; Pushes to Array and HTML
+    if (wordChoice.indexOf(keyPress) < 0 && keyPress.match(/^[a-z]+$/) && guessedLettersArray.includes(keyPress) === false) {
       guessedLettersArray.push(keyPress);
       lettersGuessed.textContent = guessedLettersArray.join(' ');
       // Decreases Guesses Remaining
@@ -64,17 +66,17 @@ document.onkeyup = function(event) {
       if (countDown===0) {
         answerArray = [];
         guessedLettersArray = [];
-        count.textContent = 0;
         alert('GAME OVER');
-          // Determines End of Game or Restart
+          // Determines End Of Game Or Restart
           if (confirm ('Play again?') === true) {
             lettersGuessed.textContent = '';
-            countDown = 15;
+            countDown = 10;
             count.textContent = countDown;
             wordChoice = hangmanAnswers[Math.floor(Math.random() * hangmanAnswers.length)];
-            console.log(wordChoice);
             underscoreBuilder(wordChoice);
             currentWord.textContent = answerArray.join(' ');
+            // Troubleshoot: Restart
+            console.log(wordChoice, answerArray);
           } else {
             alert('Rock on.');
             currentWord.textContent = 'GAME OVER';
@@ -85,7 +87,7 @@ document.onkeyup = function(event) {
       }
     };
 
-  // Determines Correct Guess and Updates Array
+  // Determines Correct Guess and Updates answerArray
   for (var guessIndex = 0; guessIndex < wordChoice.length; guessIndex++) {
     if (wordChoice.charAt(guessIndex) == keyPress) {
       answerArray[guessIndex] = keyPress;
@@ -102,7 +104,7 @@ document.onkeyup = function(event) {
     isWinning++;
     wins.textContent = isWinning;
     // Restarts Guesses Remaining
-    countDown = 15;
+    countDown = 10;
     count.textContent = countDown;
     // New Word Is Chosen At Random And Game Starts Over
     currentWord.textContent = '';
