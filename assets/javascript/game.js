@@ -31,8 +31,8 @@ wins.textContent = isWinning;
 
 
 // Underscore Function: Generates Underscore For Each Letter In Word
-function underscoreBuilder(currentWord) {
-  for (var answerIndex = 0; answerIndex < currentWord.length; answerIndex++) {
+function underscoreBuilder(randomWord) {
+  for (var answerIndex = 0; answerIndex < wordChoice.length; answerIndex++) {
     answerArray.push("_");
   }
 return answerArray;
@@ -53,6 +53,14 @@ document.onkeyup = function(event) {
   let keyPress = event.key;
   // Troubleshoot: Logs keyPress to Console
   console.log(keyPress); 
+
+    // Determines Correct Guess and Updates answerArray
+    for (var guessIndex = 0; guessIndex < wordChoice.length; guessIndex++) {
+      if (wordChoice.charAt(guessIndex) == keyPress) {
+        answerArray[guessIndex] = keyPress;
+        currentWord.textContent = answerArray.join(' ');
+      }
+    }
 
     // Determines If keyPress Is Incorrect, Matches Alphabet Character, and Has Already Been Pressed; Pushes to Array and HTML
     if (wordChoice.indexOf(keyPress) < 0 && keyPress.match(/^[a-z]+$/) && guessedLettersArray.includes(keyPress) === false) {
@@ -86,14 +94,6 @@ document.onkeyup = function(event) {
           }
       }
     };
-
-  // Determines Correct Guess and Updates answerArray
-  for (var guessIndex = 0; guessIndex < wordChoice.length; guessIndex++) {
-    if (wordChoice.charAt(guessIndex) == keyPress) {
-      answerArray[guessIndex] = keyPress;
-      currentWord.textContent = answerArray.join(' ');
-    }
-  }
 
   // Restarts Game When User Has Won
   if (answerArray.join('') === wordChoice) {
