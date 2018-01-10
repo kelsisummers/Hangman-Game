@@ -1,6 +1,6 @@
 # Hangman-Game
 
-Fourth Project: Create a Hangman Game using vanilla JavaScript.
+Project 4: Create a Hangman Game using vanilla JavaScript.
 
 Theme: Rock Bands
 
