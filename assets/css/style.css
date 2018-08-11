@@ -1,46 +1,78 @@
+/* Background and Font Color */
 body {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
 }
 
+/* Game Container */
 .jumbotron {
-    border: 10px dashed white;
-    background-color: black;
+  border: 10px dashed white;
+  background-color: black;
 }
 
+/* Font Styles */
 #current-word, #count, #win, #empty-div {
-    font-size: 35px;
-    font-family: 'VT323', monospace;
-    letter-spacing: 2px;
+  font-size: 35px;
+  font-family: 'VT323', monospace;
+  letter-spacing: 2px;
 }
 
+/* Header Styles */
 h1, h2 {
-    font-family: 'Bangers', cursive;
+  font-family: 'Bangers', cursive;
 }
 
 h1 {
-    letter-spacing: 2px;
+  letter-spacing: 2px;
 }
 
 h2 {
-    letter-spacing: 4px;
+  letter-spacing: 4px;
 }
 
-.flashit{
-    color:white;
-      -webkit-animation: flash linear 1s infinite;
-      animation: flash linear 1s infinite;
-      font-size: 35px;
-      font-family: 'VT323', monospace;
-      letter-spacing: 2px;
-  }
-  @-webkit-keyframes flash {
-      0% { opacity: 1; } 
-      50% { opacity: .1; } 
-      100% { opacity: 1; }
-  }
-  @keyframes flash {
-      0% { opacity: 1; } 
-      50% { opacity: .1; } 
-      100% { opacity: 1; }
-  }
+.title {
+	font-size: 100px
+}
+/* End of Header Styles */
+
+/* Flashing Game Over Text */
+.flashit {
+  color:white;
+  -webkit-animation: flash linear 1s infinite;
+  animation: flash linear 1s infinite;
+  font-size: 35px;
+  font-family: 'VT323', monospace;
+  letter-spacing: 2px;
+}
+@-webkit-keyframes flash {
+    0% { opacity: 1; } 
+    50% { opacity: .1; } 
+    100% { opacity: 1; }
+}
+@keyframes flash {
+    0% { opacity: 1; } 
+    50% { opacity: .1; } 
+    100% { opacity: 1; }
+}
+/* End of Flashing Text CSS */
+
+/* Start of Responsive Queries */
+@media only screen and (max-width: 400px) {
+  .container {
+    width: 95%;
+	}
+	.title {
+		font-size: 80px;
+		text-align: center;
+	}
+	.display-3 {
+		font-size: 2.5rem
+	}
+	h2 {
+		font-size: 1.5rem;
+	}
+	#current-word{
+		font-size: 16px;
+	}
+}
+/* End of Responsive Queries */
