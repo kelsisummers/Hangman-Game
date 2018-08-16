@@ -9,7 +9,7 @@ Theme: Rock Bands
 Instructions:
   - Type any letter of alphabet on your keyboard to begin the game
   
-Software Stack:
+Tech Stack:
   - JavaScript
   - HTML
   - CSS
