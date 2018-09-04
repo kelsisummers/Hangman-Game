@@ -1,6 +1,6 @@
 # Hangman-Game
 
-GitHub Pages: https://kelsisummers.github.io/HangmanGame/
+<strong>Hosted App Link: https://kelsisummers.github.io/HangmanGame/</strong>
 
 An online Hangman Game using only vanilla JavaScript.
 
