@@ -1,4 +1,4 @@
-# Hangman-Game
+# HangmanGame
 
 <strong>Hosted App Link: https://kelsisummers.github.io/HangmanGame/</strong>
 
